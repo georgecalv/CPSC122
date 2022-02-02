@@ -1,0 +1,138 @@
+/*  Name: George Calvert
+    Class: CPSC 122, Section 1
+    Date Submitted: 1/27/22
+    Assignment: Project 3
+    Description: Takes two digit strings and an output file names as command line arguments
+    Converts the digit strings to variables of type int using atoiMy described below
+    Multiplies the newly created int variables and writes their product to the output file name 
+ 
+*/
+
+// include input output
+#include <iostream> 
+
+// inlcude file i/o
+#include <fstream> 
+
+// for strlen()
+#include <cstring> 
+
+// include string
+#include <string>
+
+// for pow() function
+#include <cmath>
+using namespace std;
+
+int determineNum(char);
+
+int atoiMy(char[]);
+
+
+/*
+Main takes in two arguments from the command line
+then puts the product of tthose numbers into a file 
+with name from user
+*/
+int main(int argc, char* argv[])
+{
+    // make out file variable
+    ofstream outFile;
+
+    // num 1 from command line
+    int num1 = atoiMy(argv[1]);
+
+    // num 2 from command line
+    int num2 = atoiMy(argv[2]);
+
+    // file name
+    string fileName = argv[3];
+
+    // print to file
+    outFile.open(fileName);
+    outFile << num1 * num2 << endl;
+    outFile.close();
+
+    return 0;
+
+}
+/*
+takes in a c-string array of characters and converts them to ints
+*/
+int atoiMy(char str[])
+{
+    // get size of array passed to use as 10^size
+    int size = strlen(str) - 1;
+
+    // return value
+    int result = 0;
+
+    // initialize variable to hold the char digit 
+    int num;
+    
+    /* 
+    for loop going throug c_string array
+    does (integer * 10^ size)
+    size decreses by one each time since
+    it starts at highest digit 
+    */
+    for(int i = 0; i < strlen(str); i++)
+    {
+        // convert character to integer
+        num = determineNum(str[i]);
+        result += num * pow(10, size);
+        size -= 1;
+    }
+
+    return result;
+}
+
+/*
+    determines what digit the character is and returns that integer
+    to atoiMy()
+*/
+int determineNum(char c)
+{
+    int num;
+    if(c == '0')
+    {
+        num = 0;
+    }
+    else if(c == '1')
+    {
+        num = 1;
+    }
+    else if(c == '2')
+    {
+        num = 2;
+    }
+    else if(c == '3')
+    {
+        num = 3;
+    }
+    else if(c == '4')
+    {
+        num = 4;
+    }
+    else if(c == '5')
+    {
+        num = 5;
+    }
+    else if(c == '6')
+    {
+        num = 6;
+    }
+    else if(c == '7')
+    {
+        num = 7;
+    }
+    else if(c == '8')
+    {
+        num = 8;
+    }
+    else
+    {
+        num = 9;
+    }
+    return num;
+}
