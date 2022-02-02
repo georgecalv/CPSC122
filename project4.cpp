@@ -1,10 +1,10 @@
 /*  Name: George Calvert
     Class: CPSC 122, Section 1
-    Date Submitted: 1/29/22
+    Date Submitted: 2/2/22
     Assignment: Project 4
-    Description: generates a random key for a caeser cypher then either 
-        decrypts or encrypts text from a file then puts the result in a new file 
-        based on command arguments
+    Description: generates a random key for a caeser cypher 
+        then either decrypts or encrypts text from a file 
+        then puts the result in a new file based on command arguments
 */
 
 #include <iostream> 
@@ -26,7 +26,8 @@ void fileOpen(fstream&, string, char);
 /*
 Description: takes in command line arguments 
     of whetherit is encrypting, decrypting 
-    or it is generating the key, then the file names of the reading and 
+    or it is generating the key, 
+    then the file names of the reading and 
     writing files
 Input: command line arguments of file names and wheter it 
     it is decrypting or encrypting
@@ -64,8 +65,8 @@ int main(int argc, char* argv[])
     fout.close();
 }
 /*
-Description: generates a random number that will be the key for the 
-    caeser cypher 
+Description: generates a random number 
+    that will be the key for the caeser cypher 
 Input: none
 Output: random int
 */ 
@@ -78,7 +79,7 @@ int keyGen()
 Description: While loop that goes through a file if it is not doing
     just keyfile then either encrypts or decrypts
 Input: 3 fstreams pass by refrences for input file output file 
-    and keyfile
+    and keyfile then an int that tells to encrypt/decrypt
 Output: puts either encrypted or decrypted character into file
 */ 
 void readWrite(fstream& fin, fstream& fout, fstream& keyFile, int type) 
