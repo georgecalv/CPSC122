@@ -37,12 +37,12 @@ int main(int argc, char* argv[])
 {
     fstream fin;
     fstream fout;
-    int key = keyGen();
     int type = atoi(argv[1]);
 
     // write key to file
     if(type == 0)
     {
+        int key = keyGen();
         fileOpen(fout, argv[2], 'w');
         fout << key << endl; 
     }
