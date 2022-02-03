@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     // write key to file
     if(type == 0)
     {
-        fout.open(argv[2], ios::out);
+        fileOpen(fout, argv[2], 'w');
         fout << key << endl; 
     }
     // encrypt or decrypt
@@ -57,6 +57,7 @@ int main(int argc, char* argv[])
 
         // call readWrite function
         readWrite(fin, fout, keyFile, type);
+        keyFile.close();
     }
     
 
@@ -85,7 +86,8 @@ Output: puts either encrypted or decrypted character into file
 void readWrite(fstream& fin, fstream& fout, fstream& keyFile, int type) 
 {
     char ch;
-    int key = keyFile.get();
+    int key;
+    keyFile >> key;
     // encrypt or decrypt file and put into a dif file
     // go through in file and write to out file
     while(fin.peek() != EOF)
@@ -118,7 +120,7 @@ Output: Encrypted character
 */
 char encrypt(char ch, int key)
 {
-    char encryptChar = (((ch - 65) + key) % 26) + 65;
+    char encryptChar = ((ch - 65 + key) % 26) + 65;
     return encryptChar;
 }
 
@@ -130,7 +132,7 @@ Output: Decrypted character
 */
 char decrypt(char ch, int key)
 {
-    char decryptChar = ((((ch - 65) - key) + 26) % 26) + 65;
+    char decryptChar = ((ch - 65 - key + 26) % 26) + 65;
     return decryptChar;
 }
 
