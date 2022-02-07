@@ -16,7 +16,7 @@ void keyGen(string);
 
 char encrypt(char, int, int);
 
-void readWrite(fstream&, fstream&, fstream&, int);
+void readWrite(fstream&, fstream&, fstream&, int, int, int);
 
 char decrypt(char, int, int);
 
@@ -55,12 +55,12 @@ int main(int argc, char* argv[])
         fileOpen(fout, argv[4], 'w');
 
         // read alpha and beta keys
-        int alpha;
-        int beta;
+        int alpha = 5;
+        int beta = 6;
         
 
         // call readWrite function
-        readWrite(fin, fout, keyFile, type);
+        readWrite(fin, fout, keyFile, type, alpha, beta);
         keyFile.close();
     }
     
@@ -132,7 +132,7 @@ Output: Encrypted character
 */
 char encrypt(char ch, int alpha, int beta)
 {
-    char encryptChar = ((ch - 65 + key) % 26) + 65;
+    char encryptChar = ((ch - 65 + alpha) % 26) + 65;
     return encryptChar;
 }
 
@@ -144,7 +144,7 @@ Output: Decrypted character
 */
 char decrypt(char ch, int alpha, int beta)
 {
-    char decryptChar = ((ch - 65 - key + 26) % 26) + 65;
+    char decryptChar = ((ch - 65 - alpha + 26) % 26) + 65;
     return decryptChar;
 }
 
