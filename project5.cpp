@@ -22,8 +22,9 @@ char decrypt(char, int, int, int[]);
 
 void fileOpen(fstream&, string, char);
 
-int MI[] = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
-
+//          0  1  2  3  4  5   6  7   8  9 10  11 12 13  14 15 16 17  18  19 20 21 22 23  24  25
+int MI[] = {0, 1, 0, 9, 0, 21, 0, 15, 0, 3, 0, 19, 0, 0, 0, 7, 0, 23, 0, 11, 0, 5, 0, 17, 0, 25};
+int ALPHA[] = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
 /*
 Description: takes in command line arguments 
     of whetherit is encrypting, decrypting 
@@ -59,9 +60,6 @@ int main(int argc, char* argv[])
         int beta;
         keyFile >> alpha;
         keyFile >> beta;
-        cout << alpha << endl;
-        cout << beta << endl; 
-        
 
         // call readWrite function
         readWrite(fin, fout, keyFile, type, alpha, beta);
@@ -86,7 +84,7 @@ void keyGen(string name)
     fstream keyFile;
     fileOpen(keyFile, name, 'w');
     srand(time(0));
-    int alp = MI[rand() % 12];
+    int alp = ALPHA[rand() % 12];
     int bet = rand() % 25 + 1;
     keyFile << alp << endl;
     keyFile << bet << endl;
@@ -134,7 +132,7 @@ Output: Encrypted character
 */
 char encrypt(char ch, int alpha, int beta)
 {
-    char encryptChar = ((((ch - 65) * alpha) + beta) % 26) + 65;
+    char encryptChar =  ((alpha * ((ch - 65) + beta)) % 26) + 65;
     return encryptChar;
 }
 
@@ -146,7 +144,16 @@ Output: Encrypted character
 */
 char decrypt(char ch, int alpha, int beta, int arr[])
 {
-    char decryptChar = ((ch - 65 - alpha + 26) % 26) + 65;
+    int inverse = 0;
+    // search for index of alpha variable to get inverse
+    for(int i = 0; i < 26; i++)
+    {
+        if(alpha == arr[i])
+        {
+            inverse = i;
+        }
+    }
+    char decryptChar = ((inverse * ((ch - 65) - beta))) % 26 + 65;
     return decryptChar;
 }
 
