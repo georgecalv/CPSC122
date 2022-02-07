@@ -84,7 +84,7 @@ void keyGen(string name)
     fstream keyFile;
     fileOpen(keyFile, name, 'w');
     srand(time(0));
-    int alp = ALPHA[rand() % 12];
+    int alp = ALPHA[rand() % 13];
     int bet = rand() % 25 + 1;
     keyFile << alp << endl;
     keyFile << bet << endl;
@@ -132,7 +132,7 @@ Output: Encrypted character
 */
 char encrypt(char ch, int alpha, int beta)
 {
-    char encryptChar =  ((alpha * ((ch - 65) + beta)) % 26) + 65;
+    char encryptChar =  ((alpha * (ch - 65) + beta) % 26) + 65;
     return encryptChar;
 }
 
@@ -153,7 +153,7 @@ char decrypt(char ch, int alpha, int beta, int arr[])
             inverse = i;
         }
     }
-    char decryptChar = ((inverse * ((ch - 65) - beta))) % 26 + 65;
+    char decryptChar = ((inverse * ((ch - 65) - beta)) % 26) + 65;
     return decryptChar;
 }
 
