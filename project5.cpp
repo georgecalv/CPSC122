@@ -125,22 +125,22 @@ void readWrite(fstream& fin, fstream& fout, fstream& keyFile, int type, int alph
 
 }
 /*
-Description: Encrypts using ceaser cypher, 
+Description: Encrypts using affine cypher, 
     using ascii table
-Input: Key for cypher and character
+Input: Key for cypher, character, alpha, and beta
 Output: Encrypted character
 */
 char encrypt(char ch, int alpha, int beta)
 {
-    char encryptChar = ((ch - 65 + alpha) % 26) + 65;
+    char encryptChar = ((((ch - 65) * alpha) + beta) % 26) + 65;
     return encryptChar;
 }
 
 /*
-Description: Decrypts using ceaser cypher, 
+Description: Decrypts using affine cypher, 
     using ascii table
-Input: Key for cypher and character
-Output: Decrypted character
+Input: Key for cypher, character, alpha, and beta
+Output: Encrypted character
 */
 char decrypt(char ch, int alpha, int beta)
 {
