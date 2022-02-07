@@ -18,11 +18,11 @@ char encrypt(char, int, int);
 
 void readWrite(fstream&, fstream&, fstream&, int, int, int);
 
-char decrypt(char, int, int);
+char decrypt(char, int, int, int[]);
 
 void fileOpen(fstream&, string, char);
 
-int ALPHA[] = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
+int MI[] = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
 
 /*
 Description: takes in command line arguments 
@@ -86,7 +86,7 @@ void keyGen(string name)
     fstream keyFile;
     fileOpen(keyFile, name, 'w');
     srand(time(0));
-    int alp = ALPHA[rand() % 12];
+    int alp = MI[rand() % 12];
     int bet = rand() % 25 + 1;
     keyFile << alp << endl;
     keyFile << bet << endl;
@@ -118,7 +118,7 @@ void readWrite(fstream& fin, fstream& fout, fstream& keyFile, int type, int alph
             }
             else 
             {
-                ch = decrypt(ch, alpha, beta);
+                ch = decrypt(ch, alpha, beta, MI);
             }
             
         }
@@ -140,11 +140,11 @@ char encrypt(char ch, int alpha, int beta)
 
 /*
 Description: Decrypts using affine cypher, 
-    using ascii table
+    using ascii table and global array
 Input: Key for cypher, character, alpha, and beta
 Output: Encrypted character
 */
-char decrypt(char ch, int alpha, int beta)
+char decrypt(char ch, int alpha, int beta, int arr[])
 {
     char decryptChar = ((ch - 65 - alpha + 26) % 26) + 65;
     return decryptChar;
