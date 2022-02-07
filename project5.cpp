@@ -55,8 +55,12 @@ int main(int argc, char* argv[])
         fileOpen(fout, argv[4], 'w');
 
         // read alpha and beta keys
-        int alpha = 5;
-        int beta = 6;
+        int alpha;
+        int beta;
+        keyFile >> alpha;
+        keyFile >> beta;
+        cout << alpha << endl;
+        cout << beta << endl; 
         
 
         // call readWrite function
@@ -98,8 +102,6 @@ Output: puts either encrypted or decrypted character into file
 void readWrite(fstream& fin, fstream& fout, fstream& keyFile, int type, int alpha, int beta)
 {
     char ch;
-    int key;
-    keyFile >> key;
     // encrypt or decrypt file and put into a dif file
     // go through in file and write to out file
     while(fin.peek() != EOF)
